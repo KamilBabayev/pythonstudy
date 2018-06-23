@@ -29,5 +29,14 @@ class Friend(Contact):
         self.phone = phone
 
 # But here is one problem, there are many duplicate code in Friend class, which were in Contact also.
+# It is better to execute __init__ method from Contact without overriding.super() - comes to help here - it
+# returns the object as an instance of the parent class, allowing us to call parent class directly.
 
+class Friend(Contact):
+    def __init__(self, name, email, phone):
+        super().__init__(name, email)
+        self.phone = phone
 
+# This example first gets the instance of the parent object using super, and calls __init__ on that object, passing
+# the expected arguments. It then does its own initialization, namely, setting the phone attribute.
+# A super() call can be made inside any method , not just __init__.
