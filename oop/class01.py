@@ -40,3 +40,18 @@ class Friend(Contact):
 # This example first gets the instance of the parent object using super, and calls __init__ on that object, passing
 # the expected arguments. It then does its own initialization, namely, setting the phone attribute.
 # A super() call can be made inside any method , not just __init__.
+
+# Mutiple inheritance - it is recommended to aviod this. when needed try to implement via other ways. Ex:
+class Friend(Contact, Supplier):
+    pass
+
+class Friend(Demo1, Demo2):
+    def __init__(self, name, email, phone, address):
+        Demo1.__init__(self, name, email)
+        Demo2.__init__(self, phone)
+        self.address = address
+
+# Here we inherit from 2 classes. after main __init__ we call each parent instructor by sequence.
+# problems are, if we forget to initialize one of parents, it could cause problems later. second every parent has
+# object parent, which is called  once (in general twice) here by each of them.
+
