@@ -105,7 +105,46 @@ try:
 except TypeError as e:
     raise MyListError("Please never try to sum string and list")
 
+# Very nice explanation in this example. for ex.  i want to give name lenght error when enetered name is short.
+# By default Exception class does not have this, that is why we create our own one and use it:
 
+class NameTooShortError(ValueError):
+    pass
+
+def validate(name):
+    if len(name) < 10:
+        raise NameTooShortError(name)
+
+validate('longusername')
+validate('kamil')
+
+
+# Super class Exceptions are created when a module needs to handle several distinct errors. One of the common way of doing this is to create a base 
+# class for exceptions defined by that module. Further, various subclasses are defined to create specific exception classes for different error conditions.
+
+# class Error is derived from super class Exception
+class Error(Exception):
+ 
+    # Error is derived class for Exception, but
+    # Base class for exceptions in this module
+    pass
+ 
+class TransitionError(Error):
+ 
+    # Raised when an operation attempts a state 
+    # transition that's not allowed.
+    def __init__(self, prev, nex, msg):
+        self.prev = prev
+        self.next = nex
+ 
+        # Error message thrown is saved in msg
+        self.msg = msg
+try:
+    raise(TransitionError(2,3*2,"Not Allowed"))
+ 
+# Value of Exception is stored in error
+except TransitionError as error:
+    print('Exception occured: ',error.msg)
 
 
 
